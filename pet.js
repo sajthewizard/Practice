@@ -13,9 +13,9 @@ const showcategories=(data)=>{
         console.log(item)
         
         const category=document.createElement('div');
-        category.classList=" m-8";
+        category.classList=" m-8 jamal";
         category.innerHTML=`
-        <button class="btn w-[150px] h-[60px] rounded text-bold font-xl" onclick="lagaCategory('${item.category}')">
+        <button id="btn-${item.category}" class="btn w-[150px] h-[60px] rounded text-bold font-xl jak" onclick="lagaCategory('${item.category}')">
         <img src="${item.category_icon}" class="h-[40px]"/>
         ${item.category}
         </button>`;
@@ -23,16 +23,21 @@ const showcategories=(data)=>{
         categoryList.appendChild(category)
     })
 }
-
-
-
 //Load upon Categories
-
-
 const lagaCategory=async (name)=>{
+const jata=document.querySelectorAll(".jak");
+jata.forEach(pao=>{
+   const jaki= pao.classList.remove('bg-gray-300');
+   
+})
+
+    const rakhsi=document.getElementById(`btn-${name}`);
+  
+    console.log(name)
     const res =await fetch(`https://openapi.programming-hero.com/api/peddy/category/${name}`);
 const data=await res.json();
 showPets(data.data)
+  rakhsi.classList.add('bg-gray-300')
     
 }
 //liking for pets
@@ -72,6 +77,23 @@ showPets(data.pets)
 const showPets=(data)=>{
     const showpets=document.getElementById('showpets');
     showpets.innerHTML=``;
+    if(data.length===0){
+        showpets.classList.remove('grid')
+    showpets.innerHTML=`
+    <figure class="flex justify-center ml-[300px]">
+    <img class="object-cover h-50% w-[420px] p-1"
+      src="assets/error.webp"
+      alt="Shoes" />
+  </figure>
+  <div class="flex justify-center ml-[30px] mb-12"><h1 class="text-7xl">Search For Another Pet</h1></div>`;
+  return;
+    }
+    else{
+        showpets.classList.add('grid')
+
+    }
+ 
+    
     data.forEach(item=>{
         
         const pet=document.createElement('div');
