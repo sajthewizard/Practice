@@ -93,7 +93,7 @@ const showPets=(data)=>{
       <img class="bg-white h-[30px]" src="https://static.vecteezy.com/system/resources/thumbnails/000/423/558/small/Multimedia__287_29.jpg" />
       </button>
     <button class="btn  w-30">Adopt</button>
-    <button class="btn btn-primary w-30" onclick="my_modal_5.showModal()">Details</button>
+    <button class="btn btn-primary w-30" onclick="openModal('${item.petId}')">Details</button>
     </div>
   </div>
   `;
@@ -102,6 +102,17 @@ const showPets=(data)=>{
     })
 }
 
+const openModal=async(id)=>{
+    const res=await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+    const data=await res.json(); 
+console.log(data.petData)
+
+
+    document.getElementById('btnclick').click();
+    document.getElementById('title').innerHTML=`${data.petData.pet_name}`
+    document.getElementById('details').innerHTML=`${data.petData.pet_details}`
+     document.getElementById('chobi').innerHTML=`<img src=${data.petData.image} class="h-full w-full" alt="">`
+}
 
 
 
