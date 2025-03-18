@@ -35,7 +35,31 @@ const data=await res.json();
 showPets(data.data)
     
 }
+//liking for pets
 
+const liked=async(id)=>{
+    const res= await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+    const data = await res.json();
+    likedpets(data)
+}
+
+
+
+//showcase the liked pets
+
+const likedpets=(like)=>{
+    console.log(like.petData)
+    const liked=document.getElementById('likedpics');
+    
+    const showkoro=document.createElement('div')
+    showkoro.classList="h-[200px]"
+    showkoro.innerHTML=`
+    <img class="m-3 w-60" src="${like.petData.image}" />`;
+
+    liked.appendChild(showkoro)
+
+
+}
 
 //For Loading All the pets
 
@@ -51,9 +75,9 @@ const showPets=(data)=>{
     data.forEach(item=>{
         
         const pet=document.createElement('div');
-        pet.classList="m-2 border rounded h-[480px ]";
+        pet.classList="m-2 border rounded h-[480px] w-[450px]";
         pet.innerHTML=`
-         <figure>
+         <figure class="flex justify-center">
     <img class="object-cover h-[250px] w-[420px] p-1"
       src="${item.image}"
       alt="Shoes" />
@@ -65,11 +89,11 @@ const showPets=(data)=>{
     <p>Gender: ${item.gender?item.gender: "Not Available" } </p>
     <p>Price: ${item.price?item.price: "Not Available" } </p>
     <div class=" flex justify-between">
-      <button class="btn  w-30">
+      <button class="btn  w-30" onclick="liked(${item.petId})">
       <img class="bg-white h-[30px]" src="https://static.vecteezy.com/system/resources/thumbnails/000/423/558/small/Multimedia__287_29.jpg" />
       </button>
     <button class="btn  w-30">Adopt</button>
-    <button class="btn btn-primary w-30">Details</button>
+    <button class="btn btn-primary w-30" onclick="my_modal_5.showModal()">Details</button>
     </div>
   </div>
   `;
