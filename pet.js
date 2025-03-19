@@ -1,12 +1,10 @@
 
-
 //To load the categories
 const loadCategories=async ()=>{
     const res=await fetch('https://openapi.programming-hero.com/api/peddy/categories');
     const data=await res.json();
    showcategories(data.categories)
 }
-
 const showcategories=(data)=>{
     const categoryList=document.getElementById('categories')
     data.forEach(item=>{
@@ -27,10 +25,9 @@ const showcategories=(data)=>{
 const lagaCategory=async (name)=>{
 const jata=document.querySelectorAll(".jak");
 jata.forEach(pao=>{
-   const jaki= pao.classList.remove('bg-gray-300');
+    pao.classList.remove('bg-gray-300');
    
 })
-
     const rakhsi=document.getElementById(`btn-${name}`);
   
     console.log(name)
@@ -91,11 +88,8 @@ const showPets=(data)=>{
     else{
         showpets.classList.add('grid')
 
-    }
- 
-    
-    data.forEach(item=>{
-        
+    }   
+    data.forEach(item=>{        
         const pet=document.createElement('div');
         pet.classList="m-2 border rounded h-[480px] w-[450px]";
         pet.innerHTML=`
@@ -119,24 +113,17 @@ const showPets=(data)=>{
     </div>
   </div>
   `;
-
         showpets.appendChild(pet)
     })
 }
-
 const openModal=async(id)=>{
     const res=await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
     const data=await res.json(); 
 console.log(data.petData)
-
-
     document.getElementById('btnclick').click();
     document.getElementById('title').innerHTML=`${data.petData.pet_name}`
     document.getElementById('details').innerHTML=`${data.petData.pet_details}`
      document.getElementById('chobi').innerHTML=`<img src=${data.petData.image} class="h-full w-full" alt="">`
 }
-
-
-
 loadCategories();
 loadAllPets();
